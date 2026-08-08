@@ -69,6 +69,7 @@ public class QuestionsTests extends BaseTest {
     @Test
     public void checkFAQAnswer() {
         HomePage homePage = new HomePage(driver);
+        homePage.closeCookieBanner();
 
         String actualAnswer = homePage.getAnswer(question);
 

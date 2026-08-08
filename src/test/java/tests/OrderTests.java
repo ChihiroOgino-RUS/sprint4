@@ -123,6 +123,7 @@ public class OrderTests extends BaseTest {
     @Test
     public void checkOrder() {
         HomePage homePage = new HomePage(driver);
+        homePage.closeCookieBanner();
 
         if (entryPoint.equals("top")) {
             homePage.clickTopOrderButton();
@@ -140,8 +141,13 @@ public class OrderTests extends BaseTest {
 
         orderPage.confirmOrder();
 
-        String successHeader = orderPage.getSuccessHeader();
-        assertTrue("Не появилось окно успешного заказа",
-                successHeader.contains("Заказ оформлен"));
+        try {
+            String successHeader = orderPage.getSuccessHeader();
+            assertTrue("Не появилось окно успешного заказа",
+                    successHeader.contains("Заказ оформлен"));
+        } catch (Exception e) {
+            System.out.println("Не появилось окно успешного заказа");
+            throw e;
+        }
     }
 }

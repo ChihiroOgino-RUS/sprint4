@@ -11,19 +11,32 @@ import java.time.Duration;
 public class HomePage {
     private final WebDriver driver;
 
+    // Кнопка закрытия куки-баннера
+    private final By cookieButton = By.id("rcc-confirm-button");
+
     // Кнопка «Заказать» в header (верх страницы)
     private final By topOrderButton = By.xpath("//div[contains(@class, 'Header_Nav')]//button[text()='Заказать']");
 
     // Кнопка «Заказать» внизу страницы
     private final By bottomOrderButton = By.xpath("//div[contains(@class, 'Home_FinishButton')]//button[text()='Заказать']");
 
-
     // Ответы
     private final By answerVisible = By.xpath("//div[contains(@class, 'accordion__panel') and not(@hidden)]");
 
-
     public HomePage(WebDriver driver) {
         this.driver = driver;
+    }
+
+    // Клик по кнопке закрытия куков
+    public void closeCookieBanner() {
+        try {
+            WebElement cookie = driver.findElement(cookieButton);
+            if (cookie.isDisplayed()) {
+                cookie.click();
+            }
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            // Баннера нет — ок, продолжаем
+        }
     }
 
     // Клик по верхней кнопке "Заказать"
@@ -33,8 +46,7 @@ public class HomePage {
 
     // Клик по нижней кнопке "Заказать"
     public void clickBottomOrderButton() {
-        WebElement element = driver.findElement(bottomOrderButton);
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+        driver.findElement(bottomOrderButton).click();
     }
 
     // Вопросы
