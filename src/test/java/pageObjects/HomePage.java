@@ -1,7 +1,9 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -40,7 +42,9 @@ public class HomePage {
     }
 
     public void clickQuestion(String question) {
-        driver.findElement(questionElement(question)).click();
+        WebElement element = driver.findElement(questionElement(question));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
+        element.click();
     }
 
     public String getAnswer(String question) {
