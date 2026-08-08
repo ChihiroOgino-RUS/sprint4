@@ -2,6 +2,9 @@ package pageObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class OrderPage {
 
@@ -43,7 +46,7 @@ public class OrderPage {
     private final By commentField = By.xpath("//input[@placeholder='Комментарий для курьера']");
 
     // кнопка "Заказать"
-    private final By orderButton = By.xpath("//button[text()='Заказать']");
+    private final By orderButton = By.xpath("//div[contains(@class, 'Order_Buttons')]//button[text()='Заказать']");
 
     // Диалог подтверждения
     // Заголовок окна «Хотите оформить заказ?»
@@ -117,9 +120,9 @@ public class OrderPage {
         driver.findElement(nextButton).click();
     }
 
-    public void fillFirstPart(String name, String surName, String address, String metro, String phone) {
+    public void fillFirstPart(String name, String surname, String address, String metro, String phone) {
         setNameField(name);
-        setSurnameField(surName);
+        setSurnameField(surname);
         setAddressField(address);
         selectMetro(metro);
         setPhoneField(phone);
@@ -156,6 +159,8 @@ public class OrderPage {
     }
 
     public String getConfirmHeader() {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(d -> d.findElement(confirmModalHeader).isDisplayed());
         return driver.findElement(confirmModalHeader).getText();
     }
 
@@ -164,6 +169,8 @@ public class OrderPage {
     }
 
     public String getSuccessHeader() {
+        new WebDriverWait(driver, Duration.ofSeconds(3))
+                .until(d -> d.findElement(successModalHeader).isDisplayed());
         return driver.findElement(successModalHeader).getText();
     }
 }

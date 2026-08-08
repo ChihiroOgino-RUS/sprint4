@@ -33,7 +33,8 @@ public class HomePage {
 
     // Клик по нижней кнопке "Заказать"
     public void clickBottomOrderButton() {
-        driver.findElement(bottomOrderButton).click();
+        WebElement element = driver.findElement(bottomOrderButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     // Вопросы
