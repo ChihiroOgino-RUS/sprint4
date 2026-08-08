@@ -44,7 +44,7 @@ public class HomePage {
     public void clickQuestion(String question) {
         WebElement element = driver.findElement(questionElement(question));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
-        element.click();
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
 
     public String getAnswer(String question) {
