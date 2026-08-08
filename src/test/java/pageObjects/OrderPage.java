@@ -142,13 +142,13 @@ public class OrderPage {
         driver.findElement(orderButton).click();
     }
 
-    public void fillSecondPart(int day, String period, boolean setBlackColour, boolean setGreyColour, String comment) {
+    public void fillSecondPart(int day, String period, boolean black, boolean grey, String comment) {
         selectDate(day);
         selectPeriod(period);
-        if (setBlackColour) {
+        if (black) {
             clickBlackCheckbox();
         }
-        if (setGreyColour) {
+        if (grey) {
             clickGreyCheckbox();
         }
         setCommentField(comment);
