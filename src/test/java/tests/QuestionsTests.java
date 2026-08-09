@@ -67,7 +67,7 @@ public class QuestionsTests extends BaseTest {
     }
 
     @Test
-    public void checkFAQAnswer() {
+    public void testQuestionAnswer() {
         HomePage homePage = new HomePage(driver);
         homePage.closeCookieBanner();
 
